@@ -41,9 +41,14 @@ class Menu extends Phaser.Scene{
         //start the game
         if (Phaser.Input.Keyboard.JustDown(keySPACE)){
             this.scene.start('playScene')
+
+            // //start the game
+            // game.settings = {
+            //     bambooSpeed: 3
+            // }
+
+
         }
-
     }
-
 
 }
