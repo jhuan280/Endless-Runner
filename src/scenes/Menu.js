@@ -43,10 +43,10 @@ class Menu extends Phaser.Scene{
 
             this.scene.start('playScene')
 
-            // //start the game
-            // game.settings = {
-            //     bambooSpeed: 3
-            // }
+            //start the game
+            game.settings = {
+                gameTimer: 0
+            }
 
 
         }

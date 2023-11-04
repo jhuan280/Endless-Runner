@@ -3,14 +3,14 @@ class Play extends Phaser.Scene{
         super("playScene")
     }
 
-    preload(){
-        this.load.image('background_2', './assets/background_2.png');
-        this.load.atlas('panda', './assets/panda.png', './assets/panda.json')
+    // preload(){
+    //     this.load.image('background_2', './assets/background_2.png');
+    //     this.load.atlas('panda', './assets/panda.png', './assets/panda.json')
 
-        this.load.image('ground', './assets/ground.png')
-        this.load.image('bamboo', './assets/bamboo.png')
+    //     this.load.image('ground', './assets/ground.png')
+    //     this.load.image('bamboo', './assets/bamboo.png')
 
-    }
+    // }
 
     create(){
         //enable jumping for panda
@@ -22,29 +22,41 @@ class Play extends Phaser.Scene{
         //creating invisible ground
         this.ground = this.physics.add.sprite(game.config.width / 2, game.config.height / 1.5, 'ground').setScale(2).setOrigin(0.5, 0)
 
-        //bamboo obstacle
-        this.bamboo = this.physics.add.sprite(game.config.width / 2, game.config.height - this.game.config.height / 2.7, 'bamboo').setScale(2).setOrigin(0.5)
+        //bamboo obstacle 1
+        this.bamboo = this.physics.add.sprite(game.config.width / 1.5, game.config.height - this.game.config.height / 2.7, 'bamboo').setScale(2).setOrigin(0.5)
         this.bamboo.body.setSize(10, 30).setOffset(15,15)
         this.bambooSpeed = this.bamboo.body.setVelocityX(-200)
         // this.moveSpeed = game.settings.bambooSpeed
+
+        //bamboo obstacle 2
+        this.bamboo2 = this.physics.add.sprite(game.config.width / 2, game.config.height - this.game.config.height / 2.7, 'bamboo').setScale(2).setOrigin(0.5)
+        this.bamboo2.body.setSize(10, 30).setOffset(15,15)
+        this.bambooSpeed2 = this.bamboo2.body.setVelocityX(-200)
+
+        //bamboo obstacle 3
+        this.bamboo3 = this.physics.add.sprite(game.config.width / 3, game.config.height - this.game.config.height / 2.7, 'bamboo').setScale(2).setOrigin(0.5)
+        this.bamboo3.body.setSize(10, 30).setOffset(15,15)
+        this.bambooSpeed3 = this.bamboo3.body.setVelocityX(-200)
+
 
         //player model and animations
         this.player1 = this.physics.add.sprite(game.config.width / 5, game.config.height - this.game.config.height / 3, 'panda', 'panda 0.png').setScale(5).setOrigin(0.5)
         this.player1.body.setSize(10, 15).setOffset(20,16)
 
-        this.textures.addSpriteSheetFromAtlas('panda 0.png', {frameHeight: 32, frameWidth: 16, atlas: 'panda', frame: 'panda 0.png'})
-        this.anims.create({
-            key: "run",
-            frameRate: 5,
-            repeat: -1,
-            frames: this.anims.generateFrameNames(
-                'panda', {
-                    prefix: 'panda ',
-                    start: 0,
-                    end: 3,
-                    suffix: '.png'  
-            })
-        })
+        // this.textures.addSpriteSheetFromAtlas('panda 0.png', {frameHeight: 32, frameWidth: 16, atlas: 'panda', frame: 'panda 0.png'})
+
+        // this.anims.create({
+        //     key: "run",
+        //     frameRate: 5,
+        //     repeat: -1,
+        //     frames: this.anims.generateFrameNames(
+        //         'panda', {
+        //             prefix: 'panda ',
+        //             start: 0,
+        //             end: 3,
+        //             suffix: '.png'  
+        //     })
+        // })
 
         this.player1.anims.play('run');
 
@@ -54,6 +66,36 @@ class Play extends Phaser.Scene{
 
         this.ground.body.setCollideWorldBounds(true)
         // this.physics.add.collider(this.player1, this.ground)
+
+        //time stuff
+        this.timer = game.settings.gameTimer
+
+        let timeConfig = {
+            fontFamily: 'Courier New',
+            fontSize: '28px',
+            backgroundColor: '#F3B141',
+            color: '#843605',
+            align: 'right',
+            padding: {
+                top: 5,
+                bottom: 5,
+            },
+            fixedWidth: 0
+        }
+
+        this.timerDisplay = this.add.text(game.config.width/2, borderUISize + borderPadding * 0.5, this.timer / 1000, timeConfig).setOrigin(0.5, 0)
+
+        this.clock = this.time.addEvent({
+            delay: 1000,
+            callback: () => {
+                this.timer += 1000
+                this.timerDisplay.text = this.timer * 1000
+            },
+            callbackScope:this,
+            loop: true
+        });
+
+        // console.log(this.clock)
 
 
         
@@ -71,6 +113,14 @@ class Play extends Phaser.Scene{
             this.bamboo.x = game.config.width
         }
 
+        if (this.bamboo2.x <= 0){
+            this.bamboo2.x = game.config.width
+        }
+
+        if (this.bamboo3.x <= 0){
+            this.bamboo3.x = game.config.width
+        }
+
         if (this.player1.body.touching.down){
             if (Phaser.Input.Keyboard.JustDown(keySPACE)){
                 this.player1.body.setVelocity(0, -1 * 350);
@@ -83,14 +133,18 @@ class Play extends Phaser.Scene{
         this.physics.add.collider(this.player1, this.bamboo, (player1,bamboo)=>{
             this.player1.body.setVelocity(0)
             this.scene.start('gameOverScene')
+        })
 
+        this.physics.add.collider(this.player1, this.bamboo2, (player1,bamboo2)=>{
+            this.player1.body.setVelocity(0)
+            this.scene.start('gameOverScene')
+        })
 
+        this.physics.add.collider(this.player1, this.bamboo3, (player1,bamboo2)=>{
+            this.player1.body.setVelocity(0)
+            this.scene.start('gameOverScene')
         })
 
     }
-
-
-
-
 
 }

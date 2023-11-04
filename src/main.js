@@ -20,7 +20,7 @@ let config = {
             debug: true,
         }
     },
-    scene: [Menu, Play, GameOver]
+    scene: [Load, Menu, Play, GameOver]
 }
 
 
