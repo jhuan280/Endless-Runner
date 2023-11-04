@@ -24,15 +24,15 @@ class Play extends Phaser.Scene{
 
         //bamboo obstacle
         this.bamboo = this.physics.add.sprite(game.config.width / 2, game.config.height - this.game.config.height / 2.7, 'bamboo').setScale(2).setOrigin(0.5)
-        this.bamboo.body.setSize(15, 30).setOffset(16,16)
+        this.bamboo.body.setSize(10, 30).setOffset(15,15)
         this.bambooSpeed = this.bamboo.body.setVelocityX(-200)
         // this.moveSpeed = game.settings.bambooSpeed
 
         //player model and animations
         this.player1 = this.physics.add.sprite(game.config.width / 5, game.config.height - this.game.config.height / 3, 'panda', 'panda 0.png').setScale(5).setOrigin(0.5)
-        this.player1.body.setSize(15, 15).setOffset(16,16)
+        this.player1.body.setSize(10, 15).setOffset(20,16)
 
-        this.textures.addSpriteSheetFromAtlas('frame1 0.png', {frameHeight: 32, frameWidth: 16, atlas: 'panda', frame: 'panda 0.png'})
+        this.textures.addSpriteSheetFromAtlas('panda 0.png', {frameHeight: 32, frameWidth: 16, atlas: 'panda', frame: 'panda 0.png'})
         this.anims.create({
             key: "run",
             frameRate: 5,
@@ -54,6 +54,10 @@ class Play extends Phaser.Scene{
 
         this.ground.body.setCollideWorldBounds(true)
         // this.physics.add.collider(this.player1, this.ground)
+
+
+        
+
     }
 
 
@@ -74,6 +78,14 @@ class Play extends Phaser.Scene{
         }
 
         this.physics.add.collider(this.player1, this.ground)
+
+        //player collides bamboo
+        this.physics.add.collider(this.player1, this.bamboo, (player1,bamboo)=>{
+            this.player1.body.setVelocity(0)
+            this.scene.start('gameOverScene')
+
+
+        })
 
     }
 

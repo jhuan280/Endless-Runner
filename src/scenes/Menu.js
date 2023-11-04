@@ -40,6 +40,7 @@ class Menu extends Phaser.Scene{
     update(){
         //start the game
         if (Phaser.Input.Keyboard.JustDown(keySPACE)){
+
             this.scene.start('playScene')
 
             // //start the game

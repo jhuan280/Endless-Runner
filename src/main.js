@@ -20,7 +20,7 @@ let config = {
             debug: true,
         }
     },
-    scene: [Menu, Play]
+    scene: [Menu, Play, GameOver]
 }
 
 
@@ -29,7 +29,7 @@ let scoreConfig;
 let highScore = 0;
 
 //reserve keyboard vars
-let keySPACE;
+let keySPACE, keyR;
 
 //set UI sizes
 let borderUISize = game.config.height / 15;
