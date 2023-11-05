@@ -13,6 +13,7 @@ class Load extends Phaser.Scene{
         this.load.image('bamboo', './assets/bamboo.png')
         this.load.image('bamboo2', './assets/bamboo.png')
         this.load.image('bamboo3', './assets/bamboo.png')
+        this.load.image('sun', './assets/sun.png')
 
     }
 

@@ -1,6 +1,6 @@
 /*
 Name: Jackie Huang
-Title: Endless Runner
+Title: Panda Run (Endless Runner)
 Time: 30 hours
 */
 
@@ -27,6 +27,7 @@ let config = {
 let game = new Phaser.Game(config);
 let scoreConfig;
 let highScore = 0;
+let timer;
 
 //reserve keyboard vars
 let keySPACE, keyR;

@@ -38,6 +38,9 @@ class Play extends Phaser.Scene{
         this.bamboo3.body.setSize(10, 30).setOffset(15,15)
         this.bambooSpeed3 = this.bamboo3.body.setVelocityX(-200)
 
+        //sun 
+        this.sun = this.add.sprite(game.config.width / 3, game.config.height - this.game.config.height / 2.7, 'sun').setScale(2).setOrigin(0.5)
+
 
         //player model and animations
         this.player1 = this.physics.add.sprite(game.config.width / 5, game.config.height - this.game.config.height / 3, 'panda', 'panda 0.png').setScale(5).setOrigin(0.5)
@@ -68,7 +71,7 @@ class Play extends Phaser.Scene{
         // this.physics.add.collider(this.player1, this.ground)
 
         //time stuff
-        this.timer = game.settings.gameTimer
+        timer = game.settings.gameTimer
 
         let timeConfig = {
             fontFamily: 'Courier New',
@@ -83,13 +86,13 @@ class Play extends Phaser.Scene{
             fixedWidth: 0
         }
 
-        this.timerDisplay = this.add.text(game.config.width/2, borderUISize + borderPadding * 0.5, this.timer / 1000, timeConfig).setOrigin(0.5, 0)
+        this.timerDisplay = this.add.text(game.config.width/2, borderUISize + borderPadding * 0.5, timer / 1000, timeConfig).setOrigin(0.5, 0)
 
         this.clock = this.time.addEvent({
             delay: 1000,
             callback: () => {
-                this.timer += 1000
-                this.timerDisplay.text = this.timer * 1000
+                timer += 1
+                this.timerDisplay.text = timer
             },
             callbackScope:this,
             loop: true
@@ -97,13 +100,12 @@ class Play extends Phaser.Scene{
 
         // console.log(this.clock)
 
-
-        
-
+    
     }
 
 
     update(){
+
         this.background.tilePositionX -= -1* 2;
 
         //bamboo reset
@@ -132,19 +134,40 @@ class Play extends Phaser.Scene{
         //player collides bamboo
         this.physics.add.collider(this.player1, this.bamboo, (player1,bamboo)=>{
             this.player1.body.setVelocity(0)
+
+            if (timer > highScore){
+                highScore = timer
+            }
+
             this.scene.start('gameOverScene')
         })
 
         this.physics.add.collider(this.player1, this.bamboo2, (player1,bamboo2)=>{
             this.player1.body.setVelocity(0)
+
+            if (timer > highScore){
+                highScore = timer
+            }
+
             this.scene.start('gameOverScene')
         })
 
         this.physics.add.collider(this.player1, this.bamboo3, (player1,bamboo2)=>{
             this.player1.body.setVelocity(0)
+
+            if (timer > highScore){
+                highScore = timer
+            }
+
             this.scene.start('gameOverScene')
         })
 
     }
+
+    // gameOver(){
+    //     if (timer > this.highScore){
+    //         this.highscore = timer
+    //     }
+    // }
 
 }
