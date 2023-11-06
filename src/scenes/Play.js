@@ -41,6 +41,9 @@ class Play extends Phaser.Scene{
         //sun 
         this.sun = this.add.sprite(game.config.width / 6.5, game.config.height - this.game.config.height / 1.1, 'sun').setScale(3).setOrigin(0.5)
 
+        // //glow 
+        // this.glow = this.add.sprite(game.config.width / 6.5, game.config.height - this.game.config.height / 1.1, 'glow').setOrigin(0.5)
+
         //bird
         this.bird = this.physics.add.sprite(game.config.width / 1.5, game.config.height - this.game.config.height / 2, 'bird', 'bird 0.png').setScale(5).setOrigin(0.5) 
         this.bird.body.setSize(10, 12).setOffset(17,16)
@@ -103,13 +106,17 @@ class Play extends Phaser.Scene{
             loop: true
         });
 
+
         this.clock = this.time.addEvent({
             delay: 15000,
             callback: () => {
                 this.bambooSpeed = this.bamboo.body.setVelocityX(-300)
                 this.bambooSpeed2 = this.bamboo2.body.setVelocityX(-300)
                 this.bambooSpeed3 = this.bamboo3.body.setVelocityX(-300)
-                this.birdSpeed = this.bird.body.setVelocityX(-300)
+                this.birdSpeed = this.bird.body.setVelocityX(-500)
+                this.glow = this.add.sprite(game.config.width / 7.7, game.config.height - this.game.config.height / 1.07, 'glow').setScale(1.05)
+                this.glow.anims.play('glow')
+                // this.glow = this.add.sprite(game.config.width / 6, game.config.height - this.game.config.height / 1.1, 'glow').setOrigin(0.5)
             },
             callbackScope:this,
             loop: true

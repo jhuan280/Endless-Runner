@@ -9,7 +9,7 @@ class Load extends Phaser.Scene{
         this.load.atlas('bird', './assets/bird.png', './assets/bird.json')
 
         //glow
-        this.load.spritesheet('glow', './assets/glow.png', {frameWidth: 64, frameHeight: 64, startFrame: 0, endFrame: 4})
+        this.load.spritesheet('glow', './assets/glow.png', {frameWidth: 64, frameHeight: 64, startFrame: 0, endFrame: 16})
 
         this.load.image('ground', './assets/ground.png')
 
