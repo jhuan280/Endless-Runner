@@ -6,6 +6,10 @@ class Load extends Phaser.Scene{
     preload(){
         this.load.image('background_2', './assets/background_2.png');
         this.load.atlas('panda', './assets/panda.png', './assets/panda.json')
+        this.load.atlas('bird', './assets/bird.png', './assets/bird.json')
+
+        //glow
+        this.load.spritesheet('glow', './assets/glow.png', {frameWidth: 64, frameHeight: 64, startFrame: 0, endFrame: 4})
 
         this.load.image('ground', './assets/ground.png')
 
@@ -14,13 +18,15 @@ class Load extends Phaser.Scene{
         this.load.image('bamboo2', './assets/bamboo.png')
         this.load.image('bamboo3', './assets/bamboo.png')
         this.load.image('sun', './assets/sun.png')
+        // this.load.image('glow', './assets/glow.png')
 
     }
 
     create(){
 
         this.textures.addSpriteSheetFromAtlas('panda 0.png', {frameHeight: 32, frameWidth: 16, atlas: 'panda', frame: 'panda 0.png'})
-        
+        this.textures.addSpriteSheetFromAtlas('bird 0.png', {frameHeight: 32, frameWidth: 16, atlas: 'bird', frame: 'bird 0.png'})
+
         this.anims.create({
             key: "run",
             frameRate: 5,
@@ -33,6 +39,27 @@ class Load extends Phaser.Scene{
                     suffix: '.png'  
             })
         })
+
+        this.anims.create({
+            key: "run2",
+            frameRate: 5,
+            repeat: -1,
+            frames: this.anims.generateFrameNames(
+                'bird', {
+                    prefix: 'bird ',
+                    start: 0,
+                    end: 5,
+                    suffix: '.png'  
+            })
+        })
+
+        this.anims.create({
+            key: 'glow',
+            frames: this.anims.generateFrameNumbers('glow', {start: 0, end: 4, first: 0}),
+            frameRate: 30
+        });
+
+
 
         this.scene.start('menuScene')
     }

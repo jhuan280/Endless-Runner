@@ -39,8 +39,11 @@ class Play extends Phaser.Scene{
         this.bambooSpeed3 = this.bamboo3.body.setVelocityX(-200)
 
         //sun 
-        this.sun = this.add.sprite(game.config.width / 3, game.config.height - this.game.config.height / 2.7, 'sun').setScale(2).setOrigin(0.5)
+        this.sun = this.add.sprite(game.config.width / 6.5, game.config.height - this.game.config.height / 1.1, 'sun').setScale(3).setOrigin(0.5)
 
+        //bird
+        this.bird = this.physics.add.sprite(game.config.width / 1.5, game.config.height - this.game.config.height / 2, 'bird', 'bird 0.png').setScale(5).setOrigin(0.5) 
+        this.bird.body.setSize(10, 15).setOffset(20,16)
 
         //player model and animations
         this.player1 = this.physics.add.sprite(game.config.width / 5, game.config.height - this.game.config.height / 3, 'panda', 'panda 0.png').setScale(5).setOrigin(0.5)
@@ -62,6 +65,7 @@ class Play extends Phaser.Scene{
         // })
 
         this.player1.anims.play('run');
+        this.bird.anims.play('run2');
 
         //physics for player
         this.player1.body.setGravityY(700)
