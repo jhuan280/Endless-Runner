@@ -23,27 +23,28 @@ class Play extends Phaser.Scene{
         this.ground = this.physics.add.sprite(game.config.width / 2, game.config.height / 1.5, 'ground').setScale(2).setOrigin(0.5, 0)
 
         //bamboo obstacle 1
-        this.bamboo = this.physics.add.sprite(game.config.width / 1.5, game.config.height - this.game.config.height / 2.7, 'bamboo').setScale(2).setOrigin(0.5)
+        this.bamboo = this.physics.add.sprite(game.config.width / 2, game.config.height - this.game.config.height / 2.7, 'bamboo').setScale(2).setOrigin(0.5)
         this.bamboo.body.setSize(10, 30).setOffset(15,15)
-        this.bambooSpeed = this.bamboo.body.setVelocityX(-200)
+        this.bambooSpeed = this.bamboo.body.setVelocityX(-150)
         // this.moveSpeed = game.settings.bambooSpeed
 
         //bamboo obstacle 2
-        this.bamboo2 = this.physics.add.sprite(game.config.width / 2, game.config.height - this.game.config.height / 2.7, 'bamboo').setScale(2).setOrigin(0.5)
+        this.bamboo2 = this.physics.add.sprite(game.config.width / 1.25, game.config.height - this.game.config.height / 2.7, 'bamboo').setScale(2).setOrigin(0.5)
         this.bamboo2.body.setSize(10, 30).setOffset(15,15)
-        this.bambooSpeed2 = this.bamboo2.body.setVelocityX(-200)
+        this.bambooSpeed2 = this.bamboo2.body.setVelocityX(-150)
 
         //bamboo obstacle 3
-        this.bamboo3 = this.physics.add.sprite(game.config.width / 3, game.config.height - this.game.config.height / 2.7, 'bamboo').setScale(2).setOrigin(0.5)
+        this.bamboo3 = this.physics.add.sprite(game.config.width / 1, game.config.height - this.game.config.height / 2.7, 'bamboo').setScale(2).setOrigin(0.5)
         this.bamboo3.body.setSize(10, 30).setOffset(15,15)
-        this.bambooSpeed3 = this.bamboo3.body.setVelocityX(-200)
+        this.bambooSpeed3 = this.bamboo3.body.setVelocityX(-150)
 
         //sun 
         this.sun = this.add.sprite(game.config.width / 6.5, game.config.height - this.game.config.height / 1.1, 'sun').setScale(3).setOrigin(0.5)
 
         //bird
         this.bird = this.physics.add.sprite(game.config.width / 1.5, game.config.height - this.game.config.height / 2, 'bird', 'bird 0.png').setScale(5).setOrigin(0.5) 
-        this.bird.body.setSize(10, 15).setOffset(20,16)
+        this.bird.body.setSize(10, 12).setOffset(17,16)
+        this.birdSpeed = this.bird.body.setVelocityX(-150)
 
         //player model and animations
         this.player1 = this.physics.add.sprite(game.config.width / 5, game.config.height - this.game.config.height / 3, 'panda', 'panda 0.png').setScale(5).setOrigin(0.5)
@@ -68,7 +69,7 @@ class Play extends Phaser.Scene{
         this.bird.anims.play('run2');
 
         //physics for player
-        this.player1.body.setGravityY(700)
+        this.player1.body.setGravityY(650)
         this.player1.body.setGravityX(0)
 
         this.ground.body.setCollideWorldBounds(true)
@@ -102,6 +103,18 @@ class Play extends Phaser.Scene{
             loop: true
         });
 
+        this.clock = this.time.addEvent({
+            delay: 15000,
+            callback: () => {
+                this.bambooSpeed = this.bamboo.body.setVelocityX(-300)
+                this.bambooSpeed2 = this.bamboo2.body.setVelocityX(-300)
+                this.bambooSpeed3 = this.bamboo3.body.setVelocityX(-300)
+                this.birdSpeed = this.bird.body.setVelocityX(-300)
+            },
+            callbackScope:this,
+            loop: true
+        });
+
         // console.log(this.clock)
 
     
@@ -126,6 +139,21 @@ class Play extends Phaser.Scene{
         if (this.bamboo3.x <= 0){
             this.bamboo3.x = game.config.width
         }
+
+        
+        let random = Phaser.Math.Between(0 + this.bird. height / 2, game.config.height / 2)
+        //let random = Math.floor(Math.random() * (game.config.height / 2))
+
+        if (this.bird.x <= 0){
+            this.bird.x = game.config.width
+            this.bird.y = random
+        }
+
+        // if (timer % 15 == 0){
+        //     this.bambooSpeed = this.bamboo.body.setVelocityX(-500)
+        //     this.bambooSpeed2 = this.bamboo2.body.setVelocityX(-500)
+        //     this.bambooSpeed3 = this.bamboo3.body.setVelocityX(-500)
+        // }
 
         if (this.player1.body.touching.down){
             if (Phaser.Input.Keyboard.JustDown(keySPACE)){
@@ -156,7 +184,17 @@ class Play extends Phaser.Scene{
             this.scene.start('gameOverScene')
         })
 
-        this.physics.add.collider(this.player1, this.bamboo3, (player1,bamboo2)=>{
+        this.physics.add.collider(this.player1, this.bamboo3, (player1,bamboo3)=>{
+            this.player1.body.setVelocity(0)
+
+            if (timer > highScore){
+                highScore = timer
+            }
+
+            this.scene.start('gameOverScene')
+        })
+
+        this.physics.add.collider(this.player1, this.bird, (player1,bird)=>{
             this.player1.body.setVelocity(0)
 
             if (timer > highScore){
