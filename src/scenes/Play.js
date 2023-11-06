@@ -124,6 +124,25 @@ class Play extends Phaser.Scene{
 
         // console.log(this.clock)
 
+
+        //game over flag
+        this.gameOver = false
+
+        //music
+        let loopConfig = {
+            volume: 0.5,
+            loop: true
+        }
+
+        this.music = this.sound.add('bgm', loopConfig)
+
+        //pause music
+        if (!this.gameOver){
+            this.music.play()
+        }
+        else {
+            this.music.stop()
+        }
     
     }
 
@@ -178,6 +197,7 @@ class Play extends Phaser.Scene{
                 highScore = timer
             }
 
+            this.music.stop()
             this.scene.start('gameOverScene')
         })
 
@@ -188,6 +208,7 @@ class Play extends Phaser.Scene{
                 highScore = timer
             }
 
+            this.music.stop()
             this.scene.start('gameOverScene')
         })
 
@@ -198,6 +219,7 @@ class Play extends Phaser.Scene{
                 highScore = timer
             }
 
+            this.music.stop()
             this.scene.start('gameOverScene')
         })
 
@@ -208,6 +230,7 @@ class Play extends Phaser.Scene{
                 highScore = timer
             }
 
+            this.music.stop()
             this.scene.start('gameOverScene')
         })
 
