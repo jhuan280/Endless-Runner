@@ -22,6 +22,11 @@ class Play extends Phaser.Scene{
         //creating invisible ground
         this.ground = this.physics.add.sprite(game.config.width / 2, game.config.height / 1.5, 'ground').setScale(2).setOrigin(0.5, 0)
 
+        //bamboo speeds
+        let bambooSpeed = -150
+        let bambooSpeed2 = -150
+        let bambooSpeed3 = -150
+
         //bamboo obstacle 1
         this.bamboo = this.physics.add.sprite(game.config.width / 2, game.config.height - this.game.config.height / 2.7, 'bamboo').setScale(2).setOrigin(0.5)
         this.bamboo.body.setSize(10, 30).setOffset(15,15)
@@ -110,9 +115,18 @@ class Play extends Phaser.Scene{
         this.clock = this.time.addEvent({
             delay: 15000,
             callback: () => {
-                this.bambooSpeed = this.bamboo.body.setVelocityX(-300)
-                this.bambooSpeed2 = this.bamboo2.body.setVelocityX(-300)
-                this.bambooSpeed3 = this.bamboo3.body.setVelocityX(-300)
+                // this.bambooSpeed = this.bamboo.body.setVelocityX(-300)
+                // this.bambooSpeed2 = this.bamboo2.body.setVelocityX(-300)
+                // this.bambooSpeed3 = this.bamboo3.body.setVelocityX(-300)
+                bambooSpeed -= 50
+                bambooSpeed2 -= 50
+                bambooSpeed3 -= 50
+
+                this.bamboo.setVelocityX(bambooSpeed)
+                this.bamboo2.setVelocityX(bambooSpeed2)
+                this.bamboo3.setVelocityX(bambooSpeed3)
+
+
                 this.birdSpeed = this.bird.body.setVelocityX(-500)
                 this.glow = this.add.sprite(game.config.width / 7.7, game.config.height - this.game.config.height / 1.07, 'glow').setScale(1.05)
                 this.glow.anims.play('glow')
@@ -204,7 +218,7 @@ class Play extends Phaser.Scene{
             if (timer > highScore){
                 highScore = timer
             }
-            
+
             this.dead.play()
             this.music.stop()
             this.gameOver = true

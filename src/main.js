@@ -24,7 +24,7 @@ let config = {
             debug: true,
         }
     },
-    scene: [Load, Menu, Play, GameOver]
+    scene: [Load, Menu, Play, GameOver, Credit]
 }
 
 
@@ -34,7 +34,7 @@ let highScore = 0;
 let timer;
 
 //reserve keyboard vars
-let keySPACE, keyR;
+let keySPACE, keyRIGHT, keyLEFT, keyR;
 
 //set UI sizes
 let borderUISize = game.config.height / 15;

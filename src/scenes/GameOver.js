@@ -27,9 +27,11 @@ class GameOver extends Phaser.Scene{
         this.add.text(game.config.width/2, game.config.height/2 - borderUISize - borderPadding, 'Game Over', gameOverConfig).setOrigin(0.5);
         this.add.text(game.config.width/2, game.config.height/2, 'Press "R" to go back to menu', gameOverConfig).setOrigin(0.5);
         this.add.text(game.config.width/2, game.config.height/3, 'You survived ' + timer + ' seconds', gameOverConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/1.2, 'Press "->" key to see credits', gameOverConfig).setOrigin(0.5);
         this.add.text(game.config.width/2, game.config.height/1.5, 'High Score: ' + highScore, gameOverConfig).setOrigin(0.5);
 
         keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R)
+        keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT)
         this.select = this.sound.add('select', {volume: 0.2})
 
     }
@@ -41,6 +43,20 @@ class GameOver extends Phaser.Scene{
             //console.log("why no work")
             this.select.play()
             this.scene.start('menuScene')
+
+            // //start the game
+            // game.settings = {
+            //     bambooSpeed: 3
+            // }
+
+
+        }
+
+        if (Phaser.Input.Keyboard.JustDown(keyRIGHT)){
+            //console.log("why no work")
+            // this.select.play()
+            this.select.play()
+            this.scene.start('creditScene')
 
             // //start the game
             // game.settings = {
