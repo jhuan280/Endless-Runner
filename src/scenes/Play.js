@@ -116,6 +116,7 @@ class Play extends Phaser.Scene{
                 this.birdSpeed = this.bird.body.setVelocityX(-500)
                 this.glow = this.add.sprite(game.config.width / 7.7, game.config.height - this.game.config.height / 1.07, 'glow').setScale(1.05)
                 this.glow.anims.play('glow')
+                this.speedUp.play()
                 // this.glow = this.add.sprite(game.config.width / 6, game.config.height - this.game.config.height / 1.1, 'glow').setOrigin(0.5)
             },
             callbackScope:this,
@@ -130,11 +131,14 @@ class Play extends Phaser.Scene{
 
         //music
         let loopConfig = {
-            volume: 0.5,
+            volume: 0.1,
             loop: true
         }
 
         this.music = this.sound.add('bgm', loopConfig)
+        this.speedUp = this.sound.add('speedUp', {volume: 0.2})
+        // this.select = this.sound.add('select', {volume: 0.2})
+        this.dead = this.sound.add('dead', {volume: 0.2})
 
         //pause music
         if (!this.gameOver){
@@ -143,6 +147,9 @@ class Play extends Phaser.Scene{
         else {
             this.music.stop()
         }
+
+        //audio
+        this.jump = this.sound.add('jump', {volume: 0.2})
     
     }
 
@@ -184,6 +191,7 @@ class Play extends Phaser.Scene{
         if (this.player1.body.touching.down){
             if (Phaser.Input.Keyboard.JustDown(keySPACE)){
                 this.player1.body.setVelocity(0, -1 * 350);
+                this.jump.play()
             }
         }
 
@@ -196,8 +204,10 @@ class Play extends Phaser.Scene{
             if (timer > highScore){
                 highScore = timer
             }
-
+            
+            this.dead.play()
             this.music.stop()
+            this.gameOver = true
             this.scene.start('gameOverScene')
         })
 
@@ -208,7 +218,9 @@ class Play extends Phaser.Scene{
                 highScore = timer
             }
 
+            this.dead.play()
             this.music.stop()
+            this.gameOver = true
             this.scene.start('gameOverScene')
         })
 
@@ -219,7 +231,9 @@ class Play extends Phaser.Scene{
                 highScore = timer
             }
 
+            this.dead.play()
             this.music.stop()
+            this.gameOver = true
             this.scene.start('gameOverScene')
         })
 
@@ -230,7 +244,9 @@ class Play extends Phaser.Scene{
                 highScore = timer
             }
 
+            this.dead.play()
             this.music.stop()
+            this.gameOver = true
             this.scene.start('gameOverScene')
         })
 

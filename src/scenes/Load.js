@@ -20,6 +20,16 @@ class Load extends Phaser.Scene{
         this.load.image('sun', './assets/sun.png')
         // this.load.image('glow', './assets/glow.png')
 
+        //bgm
+        this.load.audio('bgm', './assets/bgm.mp3')
+
+        //sound effects
+        this.load.audio('jump', './assets/jump.mp3')
+        this.load.audio('select', './assets/select.mp3')
+        this.load.audio('speedUp', './assets/speedUp.mp3')
+        this.load.audio('dead', './assets/dead.mp3')
+
+
     }
 
     create(){

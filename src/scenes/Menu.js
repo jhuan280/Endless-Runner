@@ -32,7 +32,7 @@ class Menu extends Phaser.Scene{
         
         //define keys
         keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-
+        this.select = this.sound.add('select', {volume: 0.2})
     }
 
     
@@ -40,7 +40,7 @@ class Menu extends Phaser.Scene{
     update(){
         //start the game
         if (Phaser.Input.Keyboard.JustDown(keySPACE)){
-
+            this.select.play()
             this.scene.start('playScene')
 
             //start the game

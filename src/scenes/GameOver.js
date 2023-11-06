@@ -30,7 +30,7 @@ class GameOver extends Phaser.Scene{
         this.add.text(game.config.width/2, game.config.height/1.5, 'High Score: ' + highScore, gameOverConfig).setOrigin(0.5);
 
         keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R)
-
+        this.select = this.sound.add('select', {volume: 0.2})
 
     }
 
@@ -39,6 +39,7 @@ class GameOver extends Phaser.Scene{
 
         if (Phaser.Input.Keyboard.JustDown(keyR)){
             //console.log("why no work")
+            this.select.play()
             this.scene.start('menuScene')
 
             // //start the game
