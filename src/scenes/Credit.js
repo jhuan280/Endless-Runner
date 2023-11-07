@@ -26,12 +26,13 @@ class Credit extends Phaser.Scene{
         this.select = this.sound.add('select', {volume: 0.2})
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT)
 
-        let credit = this.add.text(this.game.config.width/2, this.game.config.height / 4, 
-        'test',{
-
-        })
-        
-        
+        let credit = this.add.text(this.game.config.width / 2, this.game.config.height /2, 
+        'Credits:\n\n Background Music used from Pixabay: https://pixabay.com/music/search/mood/happy/\n\n Sound Effects used from Pixabay: https://pixabay.com/sound-effects/search/select/\n\n Pixel art for background and sprites done by me using Aseprite\n\n Programming done by me\n\n Press "<-" or "Left Arrow" to go back to the menu',{
+            fontFamily: 'Times New Roman',
+            fontSize: '18px',
+            color: '#000000',
+            backgroundColor: '#FFFFFF',
+        }).setOrigin(0.5)
         
         
         

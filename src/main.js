@@ -19,9 +19,9 @@ Include some metric of accomplishment that a player can improve over time, e.g.,
 Be theoretically endless (1)                                                                                             //done
 Be playable for at least 15 seconds for a new player of low to moderate skill (1)                                        //done
 Run without significant crashes or errors (1)                                                                            //done
-Include in-game credits for all roles, assets, music, etc. (1)
+Include in-game credits for all roles, assets, music, etc. (1)                                                           //done
 
-Total Points: 14
+Total Points: 15
 
 Creative Tilt Justification (2 points) -----------------
 
@@ -35,11 +35,12 @@ The longer the game progresses, the more it shines.
 
 Visual (1): 
 From a visual standpoint, I gave my game a common color pallete theme of bright, wholesome colors to match the mood of the game.
-This was also my first time really diving into pixel art and using pixel art art software such as asperite. I'm proud of how
+This was also my first time really diving into pixel art and using pixel art art software such as asperite, so I'm proud of how
 the background, obstacles and player model/animation, etc turned out. 
 I also chose royalty-free music that fits with the chill mood of the game and chose some sound effects that synced 
 up with certain aspects of the game, such as the speed up section.
 
+Total points: 2
 
 */
 
