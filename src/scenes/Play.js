@@ -88,9 +88,9 @@ class Play extends Phaser.Scene{
 
         let timeConfig = {
             fontFamily: 'Courier New',
-            fontSize: '28px',
-            backgroundColor: '#F3B141',
-            color: '#843605',
+            fontSize: '30px',
+            backgroundColor: '#ADD8E6',
+            color: '#000000',
             align: 'right',
             padding: {
                 top: 5,

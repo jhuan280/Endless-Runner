@@ -12,9 +12,10 @@ class GameOver extends Phaser.Scene{
         //display game over
         let gameOverConfig = {
             fontFamily: 'Courier New',
-            fontSize: '28px',
-            backgroundColor: '#F3B141',
-            color: '#843605',
+            fontSize: '30px',
+            // backgroundColor: '#F3B141',
+            backgroundColor: '#000000',
+            color: '#FFFFFF',
             align: 'right',
             padding: {
                 top: 5,

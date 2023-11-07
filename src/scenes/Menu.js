@@ -12,9 +12,10 @@ class Menu extends Phaser.Scene{
         //display score
         let menuConfig = {
             fontFamily: 'Courier New',
-            fontSize: '28px',
-            backgroundColor: '#F3B141',
-            color: '#843605',
+            fontSize: '30px',
+            // backgroundColor: '#F3B141',
+            backgroundColor: '#000000',
+            color: '#FFFFFF',
             align: 'right',
             padding: {
                 top: 5,
@@ -24,7 +25,7 @@ class Menu extends Phaser.Scene{
         }
 
         //menu text
-        this.add.text(game.config.width/2, game.config.height/2 - borderUISize - borderPadding, 'ENDLESS RUNNER', menuConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/2 - borderUISize - borderPadding, 'PANDA RUN', menuConfig).setOrigin(0.5);
         this.add.text(game.config.width/2, game.config.height/2, 'Use "SPACEBAR" to jump over obstacles', menuConfig).setOrigin(0.5);
         this.add.text(game.config.width/2, game.config.height/2 + borderUISize + borderPadding, 'Press SPACEBAR to start', menuConfig).setOrigin(0.5);
         // menuConfig.backgroundColor = '#00FF00';
